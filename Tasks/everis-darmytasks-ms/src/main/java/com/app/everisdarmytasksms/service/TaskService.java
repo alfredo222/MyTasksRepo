@@ -60,8 +60,9 @@ public class TaskService {
 	//-------FIN PROBANDO--------
 	
 	//Guardar la tarea en BBDD h2
-	public void saveTask(Task task) {
+	public int saveTask(Task task) {
 		taskRepository.save(task);
+		return task.getId();
 	}
 	
 	//Actualizar tarea, identificandola por el  id
@@ -77,6 +78,20 @@ public class TaskService {
 		//Set de los nuevos valores
 		auxTask.setDescripcion(descripcionAux);
 		auxTask.setEstado(estadoAux);
+		
+		//Actualizar tarea en el repositorio con los nuevos valores
+		taskRepository.save(auxTask);
+	}
+	
+	//Actualizar tarea, identificandola por el  id
+	public void updateTaskPRUEBA(int id, String descripcion, String estado) {
+			
+		//Obtengo la tarea según el id
+		Task auxTask = taskRepository.findById(id).get();
+
+		//Set de los nuevos valores
+		auxTask.setDescripcion(descripcion);
+		auxTask.setEstado(estado);
 		
 		//Actualizar tarea en el repositorio con los nuevos valores
 		taskRepository.save(auxTask);

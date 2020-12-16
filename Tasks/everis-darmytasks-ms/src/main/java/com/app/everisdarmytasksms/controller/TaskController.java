@@ -43,13 +43,18 @@ public class TaskController {
 	//Guardar una tarea, tras el guardado se devuelve el id de la tarea guardada
 	@PostMapping("/task")
 	public int saveTask(@RequestBody Task task) {
-		taskService.saveTask(task);
-		return task.getId();
+		int id = taskService.saveTask(task);
+		return id;
 	}
 	
 	@PutMapping("/task/update/{id}")
 	public void updateTask(@PathVariable("id")int id, @RequestBody Task task) {
 		taskService.updateTask(id, task);
+	}
+	
+	@PutMapping("/task/update/prueba/{id}")
+	public void updateTaskPRUEBA(@PathVariable("id")int id, @RequestBody String descripcion, String estado) {
+		taskService.updateTaskPRUEBA(id, descripcion, estado);
 	}
 	
 	//Borrar una tarea concreta
